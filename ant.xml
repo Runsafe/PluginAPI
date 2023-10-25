@@ -17,9 +17,7 @@
 
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/runsafe-api.jar" basedir="${classes.dir}">
-            <fileset dir="${src.dir}" includes="default.yml"/>
-        </jar>
+        <jar destfile="${jar.dir}/runsafe-api.jar" basedir="${classes.dir}" />
     </target>
 
     <target name="doc">
