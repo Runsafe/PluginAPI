@@ -3,7 +3,8 @@ package no.runsafe.framework.api.database;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.player.IPlayer;
-import org.joda.time.DateTime;
+
+import java.time.ZonedDateTime;
 
 public interface IRow extends IResult
 {
@@ -12,7 +13,7 @@ public interface IRow extends IResult
 	Long Long(String column);
 	Double Double(String column);
 	Float Float(String column);
-	DateTime DateTime(String column);
+	ZonedDateTime DateTime(String column);
 	ILocation Location();
 	ILocation Location(String world, String x, String y, String z);
 	@SuppressWarnings("MethodWithTooManyParameters")

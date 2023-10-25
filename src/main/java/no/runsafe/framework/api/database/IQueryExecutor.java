@@ -3,9 +3,9 @@ package no.runsafe.framework.api.database;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.player.IPlayer;
-import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface IQueryExecutor
@@ -25,7 +25,7 @@ public interface IQueryExecutor
 	@Nonnull
 	List<Float> queryFloats(String query, Object... params);
 	@Nonnull
-	List<DateTime> queryDateTimes(String query, Object... params);
+	List<ZonedDateTime> queryDateTimes(String query, Object... params);
 	@Nonnull
 	List<IPlayer> queryPlayers(String query, Object... params);
 	@Nonnull
@@ -39,7 +39,7 @@ public interface IQueryExecutor
 	Long queryLong(String query, Object... params);
 	Double queryDouble(String query, Object... params);
 	Float queryFloat(String query, Object... params);
-	DateTime queryDateTime(String query, Object... params);
+	ZonedDateTime queryDateTime(String query, Object... params);
 	IPlayer queryPlayer(String query, Object... params);
 	IWorld queryWorld(String query, Object... params);
 	ILocation queryLocation(String query, Object... params);
