@@ -2,7 +2,8 @@ package no.runsafe.framework.api.database;
 
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.player.IPlayer;
-import org.joda.time.DateTime;
+
+import java.time.ZonedDateTime;
 
 public interface IValue extends IResult
 {
@@ -11,7 +12,7 @@ public interface IValue extends IResult
 	Long Long();
 	Double Double();
 	Float Float();
-	DateTime DateTime();
+	ZonedDateTime DateTime();
 	IPlayer Player();
 	IWorld World();
 }
