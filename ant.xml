@@ -1,0 +1,31 @@
+<project name="PluginAPI" basedir="." default="jar">
+
+    <property name="src.dir" value="src"/>
+
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir" value="${build.dir}/jar"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" debug="true" debuglevel="lines,vars,source" deprecation="true"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/runsafe-api.jar" basedir="${classes.dir}">
+            <fileset dir="${src.dir}" includes="default.yml"/>
+        </jar>
+    </target>
+
+    <target name="doc">
+        <javadoc destdir="docs/api" sourcepath="src" packagenames="no.runsafe.api.*" windowtitle="Runsafe Plugin API" />
+    </target>
+
+    <target name="clean-build" depends="clean,jar"/>
+
+</project>
