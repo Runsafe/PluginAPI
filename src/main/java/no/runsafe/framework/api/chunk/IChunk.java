@@ -3,8 +3,8 @@ package no.runsafe.framework.api.chunk;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.block.IBlock;
-import no.runsafe.framework.internal.wrapper.block.BukkitBlockState;
-import no.runsafe.framework.minecraft.entity.RunsafeEntity;
+import no.runsafe.framework.api.block.IBlockState;
+import no.runsafe.framework.api.entity.IEntity;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -18,9 +18,9 @@ public interface IChunk
 	@Nonnull
 	IBlock getBlock(int i, int i1, int i2);
 	@Nonnull
-	List<RunsafeEntity> getEntities();
+	List<IEntity> getEntities();
 	@Nonnull
-	List<BukkitBlockState> getTileEntities();
+	List<IBlockState> getTileEntities();
 	boolean isUnloaded();
 	boolean load(boolean generate);
 	boolean load();

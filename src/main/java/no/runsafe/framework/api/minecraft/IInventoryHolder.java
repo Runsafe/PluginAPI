@@ -1,8 +1,8 @@
 package no.runsafe.framework.api.minecraft;
 
-import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
+import no.runsafe.framework.api.player.IPlayerInventory;
 
 public interface IInventoryHolder
 {
-	RunsafeInventory getInventory();
+	IPlayerInventory getInventory();
 }

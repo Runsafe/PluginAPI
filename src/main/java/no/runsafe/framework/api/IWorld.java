@@ -2,14 +2,11 @@ package no.runsafe.framework.api;
 
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.entity.IEntity;
+import no.runsafe.framework.api.item.IItem;
+import no.runsafe.framework.api.item.IMeta;
 import no.runsafe.framework.api.metadata.IMetadata;
 import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.Sound;
-import no.runsafe.framework.minecraft.entity.RunsafeItem;
-import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import org.bukkit.Effect;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,7 +48,7 @@ public interface IWorld extends IMetadata
 	int getBlockTypeIdAt(int x, int y, int z);
 
 	@Nonnull
-	RunsafeItem dropItem(ILocation location, RunsafeMeta itemStack);
+	IItem dropItem(ILocation location, IMeta itemStack);
 
 	void strikeLightning(ILocation location);
 
@@ -68,7 +65,7 @@ public interface IWorld extends IMetadata
 	@Deprecated
 	IEntity spawnCreature(ILocation location, int id);
 
-	IEntity spawnFallingBlock(ILocation location, Item type);
+	IEntity spawnFallingBlock(ILocation location, IItem type);
 
 	IEntity spawn(ILocation location, RunsafeEntityType type);
 
@@ -79,8 +76,6 @@ public interface IWorld extends IMetadata
 
 	@Nonnull
 	List<IEntity> getEntities();
-
-	void playSound(ILocation location, Sound sound, float volume, float pitch);
 
 	/**
 	 * Gets a list of game rule names.
@@ -117,8 +112,6 @@ public interface IWorld extends IMetadata
 	boolean isTheEnd();
 
 	void setTime(long time);
-
-	void playEffect(ILocation location, Effect effect, int data);
 
 	ILocation getSpawnLocation();
 

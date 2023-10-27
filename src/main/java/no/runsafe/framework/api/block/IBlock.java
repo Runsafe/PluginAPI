@@ -2,20 +2,20 @@ package no.runsafe.framework.api.block;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
+import no.runsafe.framework.api.item.IItem;
 import no.runsafe.framework.api.metadata.IMetadata;
-import no.runsafe.framework.minecraft.Item;
 
 @SuppressWarnings("InstanceMethodNamingConvention")
 public interface IBlock extends IMetadata
 {
-	void set(Item type);
+	void set(IItem type);
 	IWorld getWorld();
 	ILocation getLocation();
-	Item getMaterial();
-	void setMaterial(Item material);
+	IItem getMaterial();
+	void setMaterial(IItem material);
 	void breakNaturally();
-	boolean is(Item type);
-	boolean isAny(Item... type);
+	boolean is(IItem type);
+	boolean isAny(IItem... type);
 	boolean hasInterface();
 	boolean isInteractBlock();
 	boolean canPassThrough();

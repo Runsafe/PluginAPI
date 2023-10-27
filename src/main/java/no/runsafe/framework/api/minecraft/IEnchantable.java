@@ -1,6 +1,6 @@
 package no.runsafe.framework.api.minecraft;
 
-import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.api.item.IMeta;
 
 public interface IEnchantable
 {
@@ -14,7 +14,7 @@ public interface IEnchantable
 
 	IEnchantable disenchant(IEnchant enchant);
 
-	RunsafeMeta getItem();
+	IMeta getItem();
 
 	IEnchantable enchant(Iterable<IEnchant> enchants);
 }

@@ -4,8 +4,6 @@ import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.chunk.IChunk;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.api.vector.IPoint3D;
-import no.runsafe.framework.minecraft.Sound;
-import org.bukkit.util.Vector;
 
 import java.util.List;
 
@@ -24,10 +22,6 @@ public interface ILocation
 	void decrementY(double y);
 
 	void decrementZ(double z);
-
-	void playSound(Sound sound);
-
-	void playSound(Sound sound, float volume, float pitch);
 
 	void offset(double x, double y, double z);
 
@@ -84,11 +78,5 @@ public interface ILocation
 
 	void playEffect(IWorldEffect effect, int particleAmount, double range);
 
-	Vector getDirection();
-
 	IPoint3D getPoint();
-
-	ILocation add(Vector vector);
-
-	Vector toVector();
 }

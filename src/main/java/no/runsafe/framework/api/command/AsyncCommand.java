@@ -3,7 +3,6 @@ package no.runsafe.framework.api.command;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.command.argument.IArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.internal.command.PreparedAsynchronousCommand;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -1,8 +1,8 @@
 package no.runsafe.framework.api.event;
 
-import org.bukkit.map.MapView;
+import no.runsafe.framework.api.minecraft.IMapView;
 
 public interface IMapInitializeEvent extends IRunsafeEvent
 {
-	void OnMapInitialize(MapView mapView);
+	void OnMapInitialize(IMapView mapView);
 }

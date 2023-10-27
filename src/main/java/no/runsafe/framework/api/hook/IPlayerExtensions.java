@@ -1,9 +1,8 @@
 package no.runsafe.framework.api.hook;
 
 import com.google.common.collect.ImmutableList;
+import no.runsafe.framework.api.player.IFakePlayer;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.internal.extension.player.RunsafePlayer;
-import no.runsafe.framework.minecraft.player.RunsafeFakePlayer;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -14,21 +13,21 @@ import java.util.UUID;
 public interface IPlayerExtensions
 {
 	@Nullable
-	String seen(RunsafePlayer player, IPlayer checker);
+	String seen(IPlayer player, IPlayer checker);
 	String decorate(IPlayer player);
-	boolean isNew(RunsafePlayer player);
-	Map<String, String> data(RunsafePlayer player);
+	boolean isNew(IPlayer player);
+	Map<String, String> data(IPlayer player);
 	@Nullable
-	ZonedDateTime logout(RunsafePlayer player);
+	ZonedDateTime logout(IPlayer player);
 	@Nullable
-	String banReason(RunsafePlayer player);
-	boolean shouldNotSee(RunsafePlayer player, IPlayer target);
-	boolean isVanished(RunsafePlayer player);
-	boolean isPvPFlagged(RunsafePlayer player);
-	ImmutableList<String> getGroups(RunsafePlayer player);
-	boolean setGroup(RunsafePlayer player, String group);
-	boolean canBuildNow(RunsafePlayer player);
-	boolean hasPermission(RunsafeFakePlayer player, ImmutableList<String> memberOf, String permission);
+	String banReason(IPlayer player);
+	boolean shouldNotSee(IPlayer player, IPlayer target);
+	boolean isVanished(IPlayer player);
+	boolean isPvPFlagged(IPlayer player);
+	ImmutableList<String> getGroups(IPlayer player);
+	boolean setGroup(IPlayer player, String group);
+	boolean canBuildNow(IPlayer player);
+	boolean hasPermission(IFakePlayer player, ImmutableList<String> memberOf, String permission);
 	List<String> getGroups();
 	List<String> find(String playerName);
 	@Nullable

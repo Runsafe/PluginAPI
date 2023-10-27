@@ -1,23 +1,22 @@
 package no.runsafe.framework.api.player;
 
+import no.runsafe.framework.api.item.IItem;
+import no.runsafe.framework.api.item.IMeta;
 import no.runsafe.framework.api.minecraft.IInventoryHolder;
-import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
-import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 import javax.annotation.Nullable;
 
 public interface IPlayerInventory extends IInventoryHolder
 {
-	void give(RunsafeMeta... items);
+	void give(IMeta... items);
 
-	boolean hasItem(Item itemType, int amount);
+	boolean hasItem(IItem itemType, int amount);
 
-	boolean hasItemStrict(Item itemType, int amount);
+	boolean hasItemStrict(IItem itemType, int amount);
 
-	void removeItem(Item itemType, int amount);
+	void removeItem(IItem itemType, int amount);
 
-	void removeItem(Item itemType);
+	void removeItem(IItem itemType);
 
 	void clearInventory();
 
@@ -25,43 +24,43 @@ public interface IPlayerInventory extends IInventoryHolder
 
 	@Deprecated
 	@Nullable
-	RunsafeMeta getItemInHand();
+	IMeta getItemInHand();
 
 	@Nullable
-	RunsafeMeta getItemInMainHand();
+	IMeta getItemInMainHand();
 
 	@Nullable
-	RunsafeMeta getItemInOffHand();
+	IMeta getItemInOffHand();
 
-	void setItemInMainHand(RunsafeMeta itemStack);
+	void setItemInMainHand(IMeta itemStack);
 
-	void setItemInOffHand(RunsafeMeta itemStack);
+	void setItemInOffHand(IMeta itemStack);
 
 	void updateInventory();
 
-	void openInventory(RunsafeInventory inventory);
+	void openInventory(IPlayerInventory inventory);
 
 	@Nullable
-	RunsafeMeta getHelmet();
+	IMeta getHelmet();
 
 	@Nullable
-	RunsafeMeta getChestplate();
+	IMeta getChestplate();
 
 	@Nullable
-	RunsafeMeta getLeggings();
+	IMeta getLeggings();
 
 	@Nullable
-	RunsafeMeta getBoots();
+	IMeta getBoots();
 
-	void setHelmet(RunsafeMeta itemStack);
+	void setHelmet(IMeta itemStack);
 
-	void setChestplate(RunsafeMeta itemStack);
+	void setChestplate(IMeta itemStack);
 
-	void setLeggings(RunsafeMeta itemStack);
+	void setLeggings(IMeta itemStack);
 
-	void setBoots(RunsafeMeta itemStack);
+	void setBoots(IMeta itemStack);
 
-	void removeExactItem(RunsafeMeta item, int amount);
+	void removeExactItem(IMeta item, int amount);
 
-	void removeExactItem(RunsafeMeta item);
+	void removeExactItem(IMeta item);
 }

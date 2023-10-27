@@ -2,10 +2,10 @@ package no.runsafe.framework.api.entity;
 
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
+import no.runsafe.framework.api.event.entity.IEntityDamageEvent;
 import no.runsafe.framework.api.metadata.IMetadata;
 import no.runsafe.framework.api.minecraft.RunsafeEntityType;
-import no.runsafe.framework.minecraft.event.entity.RunsafeEntityDamageEvent;
-import org.bukkit.util.Vector;
+import no.runsafe.framework.api.vector.IPoint3D;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,8 +32,8 @@ public interface IEntity extends IMetadata
 	boolean eject();
 	float getFallDistance();
 	void setFallDistance(float distance);
-	void setLastDamageCause(RunsafeEntityDamageEvent entityDamageEvent);
-	RunsafeEntityDamageEvent getLastDamageCause();
+	void setLastDamageCause(IEntityDamageEvent entityDamageEvent);
+	IEntityDamageEvent getLastDamageCause();
 	UUID getUniqueId();
 	int getTicksLived();
 	void setTicksLived(int ticks);
@@ -41,7 +41,7 @@ public interface IEntity extends IMetadata
 	boolean leaveVehicle();
 	IEntity getVehicle();
 	RunsafeEntityType getEntityType();
-	void setVelocity(Vector velocity);
+	void setVelocity(IPoint3D velocity);
 	void setSilent(boolean audible);
 	boolean isSilent();
 	@Override boolean equals(Object o);

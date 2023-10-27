@@ -1,7 +1,5 @@
 package no.runsafe.framework.api.player;
 
-import org.bukkit.GameMode;
-
 import javax.annotation.Nullable;
 
 public interface IPlayerGameplay

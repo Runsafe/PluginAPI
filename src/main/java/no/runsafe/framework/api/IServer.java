@@ -1,13 +1,10 @@
 package no.runsafe.framework.api;
 
+import no.runsafe.framework.api.minecraft.IInventoryHolder;
+import no.runsafe.framework.api.minecraft.IMapView;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.api.player.IPlayerInventory;
 import no.runsafe.framework.api.server.*;
-import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
-import no.runsafe.framework.minecraft.inventory.RunsafeInventoryHolder;
-import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.map.MapView;
-import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -21,7 +18,7 @@ public interface IServer extends IPlayerProvider, IPlayerManager, IBroadcast, IW
 	List<IPlayer> getPlayersWithPermission(String permission);
 
 	@Nullable
-	<T extends Plugin> T getPlugin(String pluginName);
+	<T extends IPlugin> T getPlugin(String pluginName);
 
 	void clearRecipes();
 
@@ -71,12 +68,12 @@ public interface IServer extends IPlayerProvider, IPlayerManager, IBroadcast, IW
 
 	void shutdown();
 
-	RunsafeInventory createInventory(RunsafeInventoryHolder holder, int size, String name);
+	IPlayerInventory createInventory(IInventoryHolder holder, int size, String name);
 
-	RunsafeInventory createInventory(RunsafeInventoryHolder holder, int size);
+	IPlayerInventory createInventory(IInventoryHolder holder, int size);
 
 	@Nullable
-	RunsafeInventory createInventory(RunsafeInventoryHolder holder, RunsafeInventoryType type);
+	IPlayerInventory createInventory(IInventoryHolder holder, RunsafeInventoryType type);
 
 	void stop();
 
@@ -98,7 +95,5 @@ public interface IServer extends IPlayerProvider, IPlayerManager, IBroadcast, IW
 
 	Set<String> getListeningPluginChannels();
 
-	void addRecipe(ShapedRecipe recipe);
-
-	MapView getMap(short id);
+	IMapView getMap(short id);
 }

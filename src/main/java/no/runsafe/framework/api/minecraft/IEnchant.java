@@ -1,7 +1,5 @@
 package no.runsafe.framework.api.minecraft;
 
-import no.runsafe.framework.minecraft.enchantment.RunsafeEnchantment;
-
 public interface IEnchant
 {
 	IEnchant power(int power);
@@ -26,6 +24,4 @@ public interface IEnchant
 	boolean canEnchant(IEnchantable target);
 
 	int power();
-
-	RunsafeEnchantment getEnchant();
 }

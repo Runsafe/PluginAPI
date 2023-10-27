@@ -6,5 +6,5 @@ import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 
 public interface IChestOpen extends IRunsafeEvent
 {
-	boolean OnChestOpen(IPlayer player, RunsafeInventory inventory);
+	boolean OnChestOpen(IPlayer player, IInventory inventory);
 }
