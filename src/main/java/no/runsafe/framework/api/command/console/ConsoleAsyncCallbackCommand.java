@@ -5,7 +5,7 @@ import no.runsafe.framework.api.command.AsyncCallbackCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.minecraft.RunsafeConsole;
+import no.runsafe.framework.api.log.IConsole;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -33,13 +33,13 @@ public abstract class ConsoleAsyncCallbackCommand<T> extends AsyncCallbackComman
 	@Override
 	public final T OnAsyncExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		if (executor instanceof RunsafeConsole)
+		if (executor instanceof IConsole)
 			return OnAsyncExecute(parameters);
 		return null;
 	}
 
 	/**
-	 * This method is called on the main thread before {@link ConsoleAsyncCallbackCommand#OnAsyncExecute(Map)}
+	 * This method is called on the main thread before ConsoleAsyncCallbackCommand#OnAsyncExecute(Map)
 	 * Override this method if you don't use optional arguments
 	 *
 	 * @param parameters The arguments you defined in the constructor and their values as supplied by the user
