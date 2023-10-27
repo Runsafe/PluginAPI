@@ -1,5 +1,6 @@
 package no.runsafe.framework.api.command.argument;
 
+import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 import no.runsafe.framework.api.player.IPlayer;
@@ -11,14 +12,12 @@ import java.util.Map;
 
 public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> implements ListOf.Compatible<RunsafeEntityType>
 {
-	public EntityType()
-	{
-		super("entityType");
-	}
+	public EntityType()	{ this("entityType"); }
 
 	public EntityType(String name)
 	{
 		super(name);
+		factory = GlobalKernel.Instance.getGlobalComponent(EntityTypeFactory.class);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> 
 		String filter = partial == null ? null : partial.toLowerCase();
 		List<String> alternates = new ArrayList<String>();
 
-		for (RunsafeEntityType type : no.runsafe.framework.minecraft.entity.EntityType.getTypesByName(filter))
+		for (RunsafeEntityType type : factory.getTypesByName(filter))
 			alternates.add(type.getAPIName());
 
 		return alternates;
@@ -46,7 +45,7 @@ public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> 
 		if (value == null)
 			return null;
 
-		List<RunsafeEntityType> types = no.runsafe.framework.minecraft.entity.EntityType.getTypesByName(value.toLowerCase());
+		List<RunsafeEntityType> types = factory.getTypesByName(value.toLowerCase());
 		return types.isEmpty() ? null : types.get(0).getAPIName();
 	}
 
@@ -59,4 +58,6 @@ public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> 
 			value = no.runsafe.framework.minecraft.entity.EntityType.getTypeByName(param);
 		return value == null ? defaultValue : value;
 	}
+
+	private final EntityTypeFactory factory;
 }

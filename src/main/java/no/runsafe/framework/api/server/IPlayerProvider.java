@@ -1,5 +1,6 @@
 package no.runsafe.framework.api.server;
 
+import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nullable;
@@ -40,4 +41,10 @@ public interface IPlayerProvider
 	List<String> getOnlinePlayers(IPlayer context, String playerName);
 
 	List<IPlayer> getPlayersByIDs(Iterable<String> playerStringIds);
+
+	List<String> find(String playerName);
+
+	IAmbiguousPlayer getAmbiguousPlayer(Iterable<IPlayer> ambiguous);
+
+	Object getAmbiguousPlayerByName(Iterable<String> matches);
 }

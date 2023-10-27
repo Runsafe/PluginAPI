@@ -1,11 +1,16 @@
 package no.runsafe.framework.api.command.argument;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -58,7 +63,7 @@ public class Player extends BasePlayerArgument
 		String param = params.get(name);
 		if (param == null || param.isEmpty())
 			return defaultValue;
-		return InjectionPlugin.getGlobalComponent(IServer.class).getPlayerExact(param);
+		return factory.getPlayerExact(param);
 	}
 
 	private IPlayer getOnlineValue(IPlayer context, Map<String, String> params)
@@ -66,7 +71,7 @@ public class Player extends BasePlayerArgument
 		String param = params.get(name);
 		if (param == null || param.isEmpty())
 			return defaultValue;
-		return InjectionPlugin.getGlobalComponent(IServer.class).getPlayerExact(param);
+		return GlobalKernel.Instance.getGlobalComponent(IServer.class).getPlayerExact(param);
 	}
 
 	private String expandAny(ICommandExecutor context, @Nullable String value)
@@ -78,10 +83,10 @@ public class Player extends BasePlayerArgument
 		if (quoted.matches())
 			return quoted.group(1);
 
-		List<String> matches = RunsafeServer.findPlayer(value);
+		List<String> matches = factory.find(value);
 		if (matches.size() > 1)
 		{
-			context.sendColouredMessage(new RunsafeAmbiguousPlayer(null, matches).toString());
+			context.sendColouredMessage(factory.getAmbiguousPlayerByName(matches).toString());
 			if (!isRequired() && expand)
 				return null;
 		}
@@ -99,21 +104,21 @@ public class Player extends BasePlayerArgument
 		Matcher quoted = Command.QUOTED_ARGUMENT.matcher(value);
 		if (quoted.matches())
 		{
-			IPlayer target = no.runsafe.framework.internal.Player.Get().getExact(quoted.group(1));
-			if (target.isOnline())
+			IPlayer target = factory.getPlayerExact(quoted.group(1));
+			if (target != null && target.isOnline())
 				return target.getName();
 			return null;
 		}
 
-		List<String> matches = no.runsafe.framework.internal.Player.Get().getOnline(value);
-		if (matches.size() > 1)
+		List<IPlayer> matches = factory.getOnlinePlayers(value);
+		if (matches != null && matches.size() > 1)
 		{
-			context.sendColouredMessage(new RunsafeAmbiguousPlayer(null, matches).toString());
+			context.sendColouredMessage(factory.getAmbiguousPlayer(matches).toString());
 			if (!isRequired() && expand)
 				return null;
 		}
 		if (matches != null && matches.size() == 1)
-			return matches.get(0);
+			return matches.get(0).getName();
 
 		context.sendColouredMessage("Unable to locate any players matching '%s'!", value);
 		return null;
@@ -127,15 +132,15 @@ public class Player extends BasePlayerArgument
 		Matcher quoted = Command.QUOTED_ARGUMENT.matcher(value);
 		if (quoted.matches())
 		{
-			IPlayer target = no.runsafe.framework.internal.Player.Get().getExact(quoted.group(1));
-			if (context.shouldNotSee(target))
+			IPlayer target = factory.getPlayerExact(quoted.group(1));
+			if (target == null || context.shouldNotSee(target))
 				return null;
 			return quoted.group(1);
 		}
-		List<String> matches = no.runsafe.framework.internal.Player.Get().getOnline(context, value);
-		if (matches.size() > 1)
+		List<String> matches = factory.getOnlinePlayers(context, value);
+		if (matches != null && matches.size() > 1)
 		{
-			context.sendColouredMessage(new RunsafeAmbiguousPlayer(null, matches).toString());
+			context.sendColouredMessage(factory.getAmbiguousPlayerByName(matches).toString());
 			if (!isRequired() && expand)
 				return null;
 		}

@@ -36,7 +36,7 @@ public abstract class AsyncCallbackCommand<T> extends ExecutableCommand implemen
 	)
 	{
 		console.debugFiner("Preparing AsyncCallback command with %d params and %d args", params.size(), args.length);
-		return new PreparedAsynchronousCallbackCommand(executor, stack, args, params);
+		return prepareAsyncCommand(executor, stack, args, params);
 	}
 
 	private final IScheduler scheduler;

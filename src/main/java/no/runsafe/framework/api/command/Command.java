@@ -2,10 +2,14 @@ package no.runsafe.framework.api.command;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.ImmutableList;
+import no.runsafe.framework.api.ChatColour;
+import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.command.argument.IArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.IValueExpander;
+import no.runsafe.framework.api.command.argument.IValueProvider;
 import no.runsafe.framework.api.log.IDebug;
+import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -17,7 +21,7 @@ import java.util.regex.Pattern;
  * The base command class of the framework
  * Create instances of this object for commands that only contain subcommands
  */
-public class Command implements ICommandHandler
+public class Command implements ICommandHandler, ICommandPreparer
 {
 	/**
 	 * Defines the command
@@ -64,7 +68,7 @@ public class Command implements ICommandHandler
 			"<%1$scommand%2$s>\nAvailable commands:\n%3$s",
 			ChatColour.YELLOW,
 			ChatColour.RESET,
-			Strings.join(usage, "\n")
+			String.join("\n", usage)
 		);
 	}
 
@@ -252,15 +256,15 @@ public class Command implements ICommandHandler
 	@Override
 	public final IPreparedCommand prepare(ICommandExecutor executor, @Nonnull String... args)
 	{
-		console.debugFiner("Preparing command %s %s", name, StringUtils.join(args, " "));
-		return prepareCommand(executor, new HashMap<String, String>(args.length), args, new Stack<ICommandHandler>());
+		console.debugFiner("Preparing command %s %s", name, String.join(" ", args));
+		return prepareCommand(executor, new HashMap<>(args.length), args, new Stack<>());
 	}
 
 	@Override
 	public IPreparedCommand prepareTabComplete(ICommandExecutor executor, String... args)
 	{
-		console.debugFiner("Preparing command %s %s for tab completion", name, StringUtils.join(args, " "));
-		return prepareTabCompleteCommand(executor, new HashMap<String, String>(args.length), args, new Stack<ICommandHandler>());
+		console.debugFiner("Preparing command %s %s for tab completion", name, String.join(" ", args));
+		return prepareTabCompleteCommand(executor, new HashMap<>(args.length), args, new Stack<>());
 	}
 
 	@Override
@@ -355,7 +359,7 @@ public class Command implements ICommandHandler
 	)
 	{
 		console.debugFiner("Preparing Sync command with %d params and %d args", params.size(), args.length);
-		return new PreparedSynchronousCommand(executor, stack, args, params);
+		return prepareAsyncCommand(executor, stack, args, params);
 	}
 
 	/**
@@ -443,7 +447,18 @@ public class Command implements ICommandHandler
 			{
 				if (args.length > index)
 				{
-					parameters.put(parameter.toString(), StringUtils.join(args, " ", index, args.length));
+					List<String> list = new ArrayList<>();
+					long limit = args.length;
+					long toSkip = index;
+					for (String arg : args) {
+						if (toSkip > 0) {
+							toSkip--;
+							continue;
+						}
+						if (limit-- == 0) break;
+						list.add(arg);
+					}
+					parameters.put(parameter.toString(), String.join(" ", list));
 					break;
 				}
 			}
@@ -468,4 +483,11 @@ public class Command implements ICommandHandler
 	private final String description;
 	public static final Pattern QUOTED_ARGUMENT = Pattern.compile("\"(.+)\"");
 	private static final Pattern paramPermission = Pattern.compile("<(.*)>");
+
+	@Override
+	public IPreparedCommand prepareAsyncCommand(ICommandExecutor executor, Stack<ICommandHandler> stack, String[] args, IArgumentList params) {
+		ICommandPreparer preparer = GlobalKernel.Instance.getGlobalComponent(ICommandPreparer.class);
+		return preparer.prepareAsyncCommand(executor, stack, args, params);
+	}
 }
+
