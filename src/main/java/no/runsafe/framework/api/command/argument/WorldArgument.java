@@ -2,6 +2,7 @@ package no.runsafe.framework.api.command.argument;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.IUniverseManager;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.command.ICommandExecutor;
@@ -21,6 +22,7 @@ public class WorldArgument extends CommandArgumentSpecification<IWorld> implemen
 	public WorldArgument(String name)
 	{
 		super(name);
+		multiverse = GlobalKernel.Instance.getGlobalComponent(IUniverseManager.class);
 	}
 
 	@Override
@@ -33,15 +35,10 @@ public class WorldArgument extends CommandArgumentSpecification<IWorld> implemen
 	public List<String> getAlternatives(IPlayer executor, String partial)
 	{
 		return Lists.transform(
-			Multiverse.getInstance().getAllWorlds(),
-			new Function<IWorld, String>()
-			{
-				@Override
-				public String apply(@Nullable IWorld world)
-				{
-					assert world != null;
-					return world.getName();
-				}
+			multiverse.getAllWorlds(),
+			world -> {
+				assert world != null;
+				return world.getName();
 			}
 		);
 	}
@@ -56,7 +53,7 @@ public class WorldArgument extends CommandArgumentSpecification<IWorld> implemen
 		String filter = value.toLowerCase();
 		String partialMatch = null;
 
-		for (IWorld world : Multiverse.getInstance().getAllWorlds())
+		for (IWorld world : multiverse.getAllWorlds())
 		{
 			String worldName = world.getName();
 
@@ -75,7 +72,9 @@ public class WorldArgument extends CommandArgumentSpecification<IWorld> implemen
 	{
 		String param = params.get(name);
 		if (param != null && !param.isEmpty())
-			return InjectionPlugin.getGlobalComponent(IUniverseManager.class).getWorld(params.get(name));
+			return multiverse.getWorld(params.get(name));
 		return defaultValue;
 	}
+
+	private final IUniverseManager multiverse;
 }

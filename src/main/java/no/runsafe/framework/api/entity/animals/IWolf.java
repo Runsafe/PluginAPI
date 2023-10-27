@@ -1,5 +1,6 @@
 package no.runsafe.framework.api.entity.animals;
 
+import no.runsafe.framework.api.entity.DyeColour;
 import no.runsafe.framework.api.entity.IAnimal;
 import no.runsafe.framework.api.entity.ITameable;
 

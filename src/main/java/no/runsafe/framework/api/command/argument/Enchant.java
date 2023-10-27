@@ -1,5 +1,6 @@
 package no.runsafe.framework.api.command.argument;
 
+import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.minecraft.IEnchant;
 import no.runsafe.framework.api.player.IPlayer;
@@ -19,14 +20,16 @@ public class Enchant extends CommandArgumentSpecification<IEnchant> implements L
 	public Enchant(String name)
 	{
 		super(name);
+		factory = GlobalKernel.Instance.getGlobalComponent(ITypeFactory.class);
 	}
 
 	@Override
 	public List<String> getAlternatives(IPlayer executor, String partial)
 	{
 		String filter = partial == null ? null : partial.toLowerCase();
-		List<String> alternates = new ArrayList<String>(no.runsafe.framework.minecraft.Enchant.All.size());
-		for (IEnchant enchant : no.runsafe.framework.minecraft.Enchant.All)
+		IEnchant[] enchants = factory.getAll();
+		List<String> alternates = new ArrayList<>(enchants.length);
+		for (IEnchant enchant : enchants)
 		{
 			if (filter == null)
 				alternates.add(enchant.getName());
@@ -47,7 +50,7 @@ public class Enchant extends CommandArgumentSpecification<IEnchant> implements L
 		if (value == null)
 			return null;
 		String filter = value.toLowerCase();
-		for (IEnchant enchant : no.runsafe.framework.minecraft.Enchant.All)
+		for (IEnchant enchant : factory.<IEnchant>getAll())
 		{
 			String name = enchant.getName().toLowerCase();
 			if (name.equals(filter) || name.startsWith(filter))
@@ -62,7 +65,7 @@ public class Enchant extends CommandArgumentSpecification<IEnchant> implements L
 		String param = params.get(name);
 		IEnchant value = null;
 		if (param != null && !param.isEmpty())
-			value = no.runsafe.framework.minecraft.Enchant.getByName(params.get(name));
+			value = factory.getByName(params.get(name));
 		return value == null ? defaultValue : value;
 	}
 
@@ -71,4 +74,7 @@ public class Enchant extends CommandArgumentSpecification<IEnchant> implements L
 	{
 		return false;
 	}
+
+	private final ITypeFactory factory;
 }
+

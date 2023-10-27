@@ -4,6 +4,8 @@ import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 
 import java.util.List;
 
-public interface EntityTypeFactory {
-    public List<RunsafeEntityType> getTypesByName(String filter);
+public interface ITypeFactory {
+    <T> T getByName(String name);
+	<T> T[] getMatchesByName(String filter);
+	<T> T[] getAll();
 }

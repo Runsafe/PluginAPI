@@ -17,7 +17,7 @@ public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> 
 	public EntityType(String name)
 	{
 		super(name);
-		factory = GlobalKernel.Instance.getGlobalComponent(EntityTypeFactory.class);
+		factory = GlobalKernel.Instance.getGlobalComponent(ITypeFactory.class);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> 
 		String filter = partial == null ? null : partial.toLowerCase();
 		List<String> alternates = new ArrayList<String>();
 
-		for (RunsafeEntityType type : factory.getTypesByName(filter))
+		for (RunsafeEntityType type : factory.<RunsafeEntityType>getMatchesByName(filter))
 			alternates.add(type.getAPIName());
 
 		return alternates;
@@ -45,7 +45,7 @@ public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> 
 		if (value == null)
 			return null;
 
-		List<RunsafeEntityType> types = factory.getTypesByName(value.toLowerCase());
+		List<RunsafeEntityType> types = factory.getByName(value.toLowerCase());
 		return types.isEmpty() ? null : types.get(0).getAPIName();
 	}
 
@@ -55,9 +55,9 @@ public class EntityType extends CommandArgumentSpecification<RunsafeEntityType> 
 		String param = params.get(name);
 		RunsafeEntityType value = null;
 		if (param != null && !param.isEmpty())
-			value = no.runsafe.framework.minecraft.entity.EntityType.getTypeByName(param);
+			value = factory.getByName(param);
 		return value == null ? defaultValue : value;
 	}
 
-	private final EntityTypeFactory factory;
+	private final ITypeFactory factory;
 }
