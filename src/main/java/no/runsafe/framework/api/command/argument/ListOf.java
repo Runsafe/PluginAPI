@@ -3,7 +3,6 @@ package no.runsafe.framework.api.command.argument;
 import com.google.common.collect.Lists;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.player.IPlayer;
-import org.bukkit.craftbukkit.libs.joptsimple.internal.Strings;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -35,7 +34,7 @@ public class ListOf<T> implements IArgument, IValueExpander, ITabComplete, IValu
 			if (expanded != null)
 				result.add(expanded);
 		}
-		return Strings.join(result, " ");
+		return String.join(" ", result);
 	}
 
 	@Override

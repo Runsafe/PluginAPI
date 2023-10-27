@@ -1,8 +1,9 @@
 package no.runsafe.framework.api.event.player;
 
-import no.runsafe.framework.minecraft.event.player.RunsafeOperatorEvent;
+import no.runsafe.framework.api.event.CancellableEvent;
+import no.runsafe.framework.api.player.IPlayer;
 
 public interface IPlayerOperatorEvent
 {
-	void OnPlayerOP(RunsafeOperatorEvent operatorEvent);
+	void OnPlayerOP(OperatorEventArgs operatorEvent);
 }

@@ -1,21 +1,20 @@
 package no.runsafe.framework.api.entity;
 
-import no.runsafe.framework.internal.vector.Point3D;
-import no.runsafe.framework.internal.wrapper.ObjectWrapper;
-import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.api.item.IMeta;
+import no.runsafe.framework.api.vector.IPoint3D;
 
 public interface IArmourStand extends ILivingEntity
 {
-	RunsafeMeta getItemInHand();
-	void setItemInHand(RunsafeMeta itemStack);
-	RunsafeMeta getBoots();
-	void setBoots(RunsafeMeta itemStack);
-	RunsafeMeta getLeggings();
-	void setLeggings(RunsafeMeta itemStack);
-	RunsafeMeta getChestplate();
-	void setChestplate(RunsafeMeta itemStack);
-	RunsafeMeta getHelmet();
-	void setHelmet(RunsafeMeta itemStack);
+	IMeta getItemInHand();
+	void setItemInHand(IMeta itemStack);
+	IMeta getBoots();
+	void setBoots(IMeta itemStack);
+	IMeta getLeggings();
+	void setLeggings(IMeta itemStack);
+	IMeta getChestplate();
+	void setChestplate(IMeta itemStack);
+	IMeta getHelmet();
+	void setHelmet(IMeta itemStack);
 	boolean hasBasePlate();
 	void setBasePlate(boolean basePlateValue);
 	boolean hasGravity();
@@ -28,16 +27,16 @@ public interface IArmourStand extends ILivingEntity
 	void setSmall(boolean smallValue);
 	boolean isMarker();
 	void setMarker(boolean markerValue);
-	Point3D getBodyPose();
-	void setBodyPose(Point3D poseAngle);
-	Point3D getLeftArmPose();
-	void setLeftArmPose(Point3D poseAngle);
-	Point3D getRightArmPose();
-	void setRightArmPose(Point3D poseAngle);
-	Point3D getLeftLegPose();
-	void setLeftLegPose(Point3D poseAngle);
-	Point3D getRightLegPose();
-	void setRightLegPose(Point3D poseAngle);
-	Point3D getHeadPose();
-	void setHeadPose(Point3D poseAngle);
+	IPoint3D getBodyPose();
+	void setBodyPose(IPoint3D poseAngle);
+	IPoint3D getLeftArmPose();
+	void setLeftArmPose(IPoint3D poseAngle);
+	IPoint3D getRightArmPose();
+	void setRightArmPose(IPoint3D poseAngle);
+	IPoint3D getLeftLegPose();
+	void setLeftLegPose(IPoint3D poseAngle);
+	IPoint3D getRightLegPose();
+	void setRightLegPose(IPoint3D poseAngle);
+	IPoint3D getHeadPose();
+	void setHeadPose(IPoint3D poseAngle);
 }

@@ -1,10 +1,13 @@
 package no.runsafe.framework.api;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public interface IKernel
 {
-	void addComponent(Object implOrInstance);
+    <T> T getGlobalComponent(Class<T> type);
+
+    void addComponent(Object implOrInstance);
 
 	<T> T getComponent(Class<T> type);
 

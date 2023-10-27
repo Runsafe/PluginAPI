@@ -1,6 +1,8 @@
 package no.runsafe.framework.api.event;
 
-public interface CancellableEvent
+import org.w3c.dom.events.Event;
+
+public interface CancellableEvent extends EventArgs
 {
 	boolean isCancelled();
 	void cancel();

@@ -1,9 +1,6 @@
 package no.runsafe.framework.api;
 
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.bossBar.BarColour;
-import no.runsafe.framework.minecraft.bossBar.BarFlag;
-import no.runsafe.framework.minecraft.bossBar.BarStyle;
 
 import java.util.List;
 

@@ -6,7 +6,6 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.internal.extension.player.RunsafePlayer;
 
 import javax.annotation.Nullable;
 
@@ -25,7 +24,7 @@ public abstract class PlayerAsyncCommand extends AsyncCommand implements IPlayer
 	@Override
 	public final String OnAsyncExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		if (executor instanceof RunsafePlayer)
+		if (executor instanceof IPlayer)
 			return OnAsyncExecute((IPlayer) executor, parameters);
 		return "This command cannot be used from the console.";
 	}

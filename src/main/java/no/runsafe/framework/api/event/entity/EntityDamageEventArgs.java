@@ -1,4 +1,6 @@
 package no.runsafe.framework.api.event.entity;
 
-public interface EntityDamageEventArgs {
+import no.runsafe.framework.api.event.EventArgs;
+
+public interface EntityDamageEventArgs extends EventArgs {
 }

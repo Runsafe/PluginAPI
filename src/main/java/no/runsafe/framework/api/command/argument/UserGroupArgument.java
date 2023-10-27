@@ -1,9 +1,9 @@
 package no.runsafe.framework.api.command.argument;
 
+import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.hook.IPlayerExtensions;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.internal.InjectionPlugin;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class UserGroupArgument extends CommandArgumentSpecification<String> impl
 	@Override
 	public List<String> getAlternatives(IPlayer executor, String partial)
 	{
-		List<String> options = InjectionPlugin.getGlobalComponent(IPlayerExtensions.class).getGroups();
+		List<String> options = GlobalKernel.Instance.getGlobalComponent(IPlayerExtensions.class).getGroups();
 		if (partial == null || partial.isEmpty())
 			return options;
 
@@ -49,7 +49,7 @@ public class UserGroupArgument extends CommandArgumentSpecification<String> impl
 	public String expand(ICommandExecutor context, @Nullable String value)
 	{
 		List<String> alternatives = getAlternatives(null, value);
-		return alternatives.isEmpty() || alternatives.size() > 1 ? null : alternatives.get(0);
+		return alternatives.size() != 1 ? null : alternatives.get(0);
 	}
 
 	@Override

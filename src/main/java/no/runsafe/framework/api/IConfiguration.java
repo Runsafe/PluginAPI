@@ -1,7 +1,7 @@
 package no.runsafe.framework.api;
 
+import no.runsafe.framework.api.item.IItem;
 import no.runsafe.framework.api.item.IMaterial;
-import no.runsafe.framework.minecraft.Item;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -53,7 +53,7 @@ public interface IConfiguration
 	List<Integer> getConfigValueAsIntegerList(String key);
 
 	@Nullable
-	Item getConfigValueAsItem(String key);
+	IItem getConfigValueAsItem(String key);
 
 	/**
 	 * @param key   The configuration key
