@@ -1,6 +1,5 @@
 package no.runsafe.framework.api;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public interface IKernel

@@ -8,7 +8,6 @@ import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.log.IConsole;
 
 import javax.annotation.Nullable;
-import java.util.Map;
 
 /**
  * Base class representing a command that can only be executed by the console and has an implementation that can be executed asynchronously with a return value
@@ -28,7 +27,6 @@ public abstract class ConsoleAsyncCallbackCommand<T> extends AsyncCallbackComman
 		return null;
 	}
 
-	@SuppressWarnings("InstanceofInterfaces")
 	@Nullable
 	@Override
 	public final T OnAsyncExecute(ICommandExecutor executor, IArgumentList parameters)

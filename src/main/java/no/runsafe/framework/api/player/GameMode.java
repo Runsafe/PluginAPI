@@ -4,5 +4,5 @@ public enum GameMode {
     CREATIVE,
     SURVIVAL,
     ADVENTURE,
-    SPECTATOR;
+    SPECTATOR
 }

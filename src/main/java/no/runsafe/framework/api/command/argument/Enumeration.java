@@ -5,7 +5,6 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nullable;
-import java.lang.Enum;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +15,7 @@ public class Enumeration extends CommandArgumentSpecification<Enum<?>> implement
 	public Enumeration(String name, Enum<?>... values)
 	{
 		super(name);
-		List<String> names = new ArrayList<String>(values.length);
+		List<String> names = new ArrayList<>(values.length);
 		for (Enum<?> value : values)
 		{
 			this.values.put(value.name(), value);
@@ -34,7 +33,6 @@ public class Enumeration extends CommandArgumentSpecification<Enum<?>> implement
 	@Override
 	public List<String> getAlternatives(IPlayer executor, String partial)
 	{
-		//noinspection ReturnOfCollectionOrArrayField
 		return alternatives;
 	}
 
@@ -62,5 +60,5 @@ public class Enumeration extends CommandArgumentSpecification<Enum<?>> implement
 	}
 
 	private final ImmutableList<String> alternatives;
-	private final Map<String, Enum<?>> values = new HashMap<String, Enum<?>>(0);
+	private final Map<String, Enum<?>> values = new HashMap<>(0);
 }

@@ -73,7 +73,7 @@ public interface IServer extends IPlayerProvider, IPlayerManager, IBroadcast, IW
 	IPlayerInventory createInventory(IInventoryHolder holder, int size);
 
 	@Nullable
-	IPlayerInventory createInventory(IInventoryHolder holder, RunsafeInventoryType type);
+	IPlayerInventory createInventory(IInventoryHolder holder, InventoryType type);
 
 	void stop();
 
@@ -89,7 +89,7 @@ public interface IServer extends IPlayerProvider, IPlayerManager, IBroadcast, IW
 
 	boolean isPrimaryThread();
 
-	String getMotd();
+	String getMessageOfTheDay();
 
 	String getShutdownMessage();
 

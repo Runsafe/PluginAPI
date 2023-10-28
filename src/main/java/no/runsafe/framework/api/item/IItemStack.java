@@ -25,17 +25,17 @@ public interface IItemStack {
 
     int getMaxStackSize();
 
-    boolean containsEnchantment(IEnchantment ench);
+    boolean containsEnchantment(IEnchantment enchant);
 
-    int getEnchantmentLevel(IEnchantment ench);
+    int getEnchantmentLevel(IEnchantment enchant);
 
     Map<IEnchantment, Integer> getEnchantments();
 
-    void addEnchantment(IEnchantment ench, int level);
+    void addEnchantment(IEnchantment enchant, int level);
 
-    void addUnsafeEnchantment(IEnchantment ench, int level);
+    void addUnsafeEnchantment(IEnchantment enchant, int level);
 
-    int removeEnchantment(IEnchantment ench);
+    int removeEnchantment(IEnchantment enchant);
 
     boolean hasItemMeta();
 }

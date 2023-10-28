@@ -22,6 +22,7 @@ public abstract class CommandArgumentSpecification<T> implements IArgument, IVal
 	}
 
 	@Override
+	@Nonnull
 	public CharSequence subSequence(int start, int end)
 	{
 		return name.subSequence(start, end);

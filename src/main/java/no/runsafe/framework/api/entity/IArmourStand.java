@@ -11,8 +11,8 @@ public interface IArmourStand extends ILivingEntity
 	void setBoots(IMeta itemStack);
 	IMeta getLeggings();
 	void setLeggings(IMeta itemStack);
-	IMeta getChestplate();
-	void setChestplate(IMeta itemStack);
+	IMeta getChestPlate();
+	void setChestPlate(IMeta itemStack);
 	IMeta getHelmet();
 	void setHelmet(IMeta itemStack);
 	boolean hasBasePlate();

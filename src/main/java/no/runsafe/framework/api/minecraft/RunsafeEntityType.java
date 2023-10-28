@@ -11,7 +11,7 @@ public interface RunsafeEntityType
 
 	boolean isAlive();
 
-	boolean isSpawnable();
+	boolean isSpawnAble();
 
 	IEntity spawn(ILocation location);
 

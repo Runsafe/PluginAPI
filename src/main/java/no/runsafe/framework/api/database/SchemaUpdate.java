@@ -1,6 +1,9 @@
 package no.runsafe.framework.api.database;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class SchemaUpdate implements ISchemaUpdate
 {
@@ -24,5 +27,5 @@ public class SchemaUpdate implements ISchemaUpdate
 	}
 
 	private int currentRevision = 1;
-	private final HashMap<Integer, List<String>> queries = new LinkedHashMap<Integer, List<String>>(0);
+	private final HashMap<Integer, List<String>> queries = new LinkedHashMap<>(0);
 }

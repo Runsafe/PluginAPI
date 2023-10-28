@@ -16,7 +16,6 @@ public abstract class PlayerCommand extends ExecutableCommand implements IPlayer
 		super(commandName, description, permission, arguments);
 	}
 
-	@SuppressWarnings("InstanceofInterfaces")
 	@Override
 	public final String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{

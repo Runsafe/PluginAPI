@@ -14,7 +14,6 @@ import javax.annotation.Nullable;
  * Base class representing a command that can only be executed by a player and has an implementation that can be executed asynchronously with a return value
  * WARNING: Do not call bukkit APIs from the background thread!
  */
-@SuppressWarnings("InstanceofInterfaces")
 public abstract class PlayerAsyncCallbackCommand<T> extends AsyncCallbackCommand<T> implements IPlayerAsyncCallbackExecute<T>
 {
 	protected PlayerAsyncCallbackCommand(String name, String description, String permission, IScheduler scheduler, IArgument... args)

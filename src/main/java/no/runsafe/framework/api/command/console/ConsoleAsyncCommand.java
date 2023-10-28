@@ -1,10 +1,10 @@
 package no.runsafe.framework.api.command.console;
 
+import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.command.AsyncCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.framework.api.command.argument.IArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.log.IConsole;
 
 import javax.annotation.Nullable;
@@ -20,7 +20,6 @@ public abstract class ConsoleAsyncCommand extends AsyncCommand implements IConso
 		super(name, description, null, scheduler, args);
 	}
 
-	@SuppressWarnings("InstanceofInterfaces")
 	@Override
 	public final String OnAsyncExecute(ICommandExecutor executor, IArgumentList parameters)
 	{

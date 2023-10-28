@@ -26,8 +26,8 @@ public class ListOf<T> implements IArgument, IValueExpander, ITabComplete, IValu
 	{
 		if (value == null)
 			return null;
-		String[] values = LISTSEPARATOR.split(value);
-		List<String> result = new ArrayList<String>(values.length);
+		String[] values = LIST_SEPARATOR.split(value);
+		List<String> result = new ArrayList<>(values.length);
 		for (String val : values)
 		{
 			String expanded = argument.expand(context, value);
@@ -43,13 +43,13 @@ public class ListOf<T> implements IArgument, IValueExpander, ITabComplete, IValu
 		String value = params.get(name);
 		if (value == null)
 			return null;
-		String[] rawValues = LISTSEPARATOR.split(value);
+		String[] rawValues = LIST_SEPARATOR.split(value);
 		List<T> values = Lists.newArrayList();
-		Map<String, String> dummy = new HashMap<String, String>(1);
+		Map<String, String> dummy = new HashMap<>(1);
 		for (String val : rawValues)
 		{
 			dummy.put(name, val);
-			T expanded = (T) argument.getValue(context, dummy);
+			T expanded = argument.getValue(context, dummy);
 			if (expanded != null)
 				values.add(expanded);
 		}
@@ -87,6 +87,7 @@ public class ListOf<T> implements IArgument, IValueExpander, ITabComplete, IValu
 	}
 
 	@Override
+	@Nonnull
 	public CharSequence subSequence(int start, int end)
 	{
 		return name.subSequence(start, end);
@@ -112,5 +113,5 @@ public class ListOf<T> implements IArgument, IValueExpander, ITabComplete, IValu
 	private boolean required;
 	private final String name;
 	private final Compatible<T> argument;
-	static final Pattern LISTSEPARATOR = Pattern.compile("\\s+");
+	static final Pattern LIST_SEPARATOR = Pattern.compile("\\s+");
 }

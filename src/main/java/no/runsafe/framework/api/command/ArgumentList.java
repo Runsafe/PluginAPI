@@ -26,12 +26,6 @@ public class ArgumentList implements IArgumentList {
     }
 
     @Override
-    @Deprecated
-    public String get(Object key) {
-        return parameterList.get(key);
-    }
-
-    @Override
     public boolean has(String param) {
         return parameterList.containsKey(param);
     }

@@ -7,7 +7,7 @@ public interface IEntityEquipment {
 
     IEntityEquipment setHelmet(IMeta itemStack);
 
-    IEntityEquipment setChestplate(IMeta itemStack);
+    IEntityEquipment setChestPlate(IMeta itemStack);
 
     IEntityEquipment setLeggings(IMeta itemStack);
 
@@ -19,7 +19,7 @@ public interface IEntityEquipment {
 
     IEntityEquipment setHelmetDropChance(float chance);
 
-    IEntityEquipment setChestplateDropChance(float chance);
+    IEntityEquipment setChestPlateDropChance(float chance);
 
     IEntityEquipment setLeggingsDropChance(float chance);
 

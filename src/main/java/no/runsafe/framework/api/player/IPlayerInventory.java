@@ -44,7 +44,7 @@ public interface IPlayerInventory extends IInventoryHolder
 	IMeta getHelmet();
 
 	@Nullable
-	IMeta getChestplate();
+	IMeta getChestPlate();
 
 	@Nullable
 	IMeta getLeggings();
@@ -54,7 +54,7 @@ public interface IPlayerInventory extends IInventoryHolder
 
 	void setHelmet(IMeta itemStack);
 
-	void setChestplate(IMeta itemStack);
+	void setChestPlate(IMeta itemStack);
 
 	void setLeggings(IMeta itemStack);
 

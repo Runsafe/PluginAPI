@@ -6,13 +6,13 @@ import java.util.List;
 public interface IMeta {
     boolean hasEnchants();
 
-    boolean hasEnchant(IEnchantment ench);
+    boolean hasEnchant(IEnchantment enchant);
 
-    int getEnchantLevel(IEnchantment ench);
+    int getEnchantLevel(IEnchantment enchant);
 
-    boolean addEnchant(IEnchantment ench, int level, boolean anyLevel);
+    boolean addEnchant(IEnchantment enchant, int level, boolean anyLevel);
 
-    boolean removeEnchant(IEnchantment ench);
+    boolean removeEnchant(IEnchantment enchant);
 
     boolean hasDisplayName();
 

@@ -2,7 +2,6 @@ package no.runsafe.framework.api.command.argument;
 
 import no.runsafe.framework.api.player.IPlayer;
 
-import java.lang.Float;
 import java.util.Map;
 
 public class DecimalNumber extends CommandArgumentSpecification<Float>

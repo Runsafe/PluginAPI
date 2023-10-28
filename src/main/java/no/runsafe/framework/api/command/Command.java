@@ -1,15 +1,13 @@
 package no.runsafe.framework.api.command;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import no.runsafe.framework.api.ChatColour;
 import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.command.argument.IArgument;
 import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.IValueExpander;
-import no.runsafe.framework.api.command.argument.IValueProvider;
 import no.runsafe.framework.api.log.IDebug;
-import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -40,7 +38,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 		name = commandName;
 		this.permission = permission;
 		this.description = description;
-		Map<String, IArgument> argumentMap = new LinkedHashMap<String, IArgument>(arguments.length);
+		Map<String, IArgument> argumentMap = new LinkedHashMap<>(arguments.length);
 		for (IArgument argument : arguments)
 			argumentMap.put(argument.toString(), argument);
 		argumentList = Collections.unmodifiableMap(argumentMap);
@@ -56,7 +54,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 	public String getUsage(@Nonnull ICommandExecutor executor)
 	{
 		Map<String, String> available = getAvailableSubCommands(executor);
-		List<String> usage = new ArrayList<String>(subCommands.size());
+		List<String> usage = new ArrayList<>(subCommands.size());
 		if (available.isEmpty())
 			return "\n " + description;
 
@@ -151,8 +149,9 @@ public class Command implements ICommandHandler, ICommandPreparer
 			String paramTag = permissionParams.group(0);
 			if (params.has(param))
 			{
-				if (params.getValue(param) != null)
-					effectivePermission = effectivePermission.replace(paramTag, params.getValue(param));
+				CharSequence value = params.getValue(param);
+				if (value != null)
+					effectivePermission = effectivePermission.replace(paramTag, value);
 			}
 			else if (argumentList.containsKey(param))
 			{
@@ -221,7 +220,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 	@Override
 	public final List<String> getSubCommands(ICommandExecutor executor)
 	{
-		List<String> available = new ArrayList<String>(subCommands.size());
+		List<String> available = new ArrayList<>(subCommands.size());
 		for (Map.Entry<String, ICommandHandler> stringCommandEntry : subCommands.entrySet())
 			if (stringCommandEntry.getValue().isTabCompletable(executor))
 				available.add(stringCommandEntry.getKey());
@@ -278,8 +277,8 @@ public class Command implements ICommandHandler, ICommandPreparer
 	{
 		stack.add(this);
 		String[] args = extractSubCommandArguments(executor, params, arguments);
-		IArgumentList myargs = new ArgumentList(executor, populateArgumentList(stack), params);
-		String permission = getEffectivePermission(myargs);
+		IArgumentList myArgs = new ArgumentList(executor, populateArgumentList(stack), params);
+		String permission = getEffectivePermission(myArgs);
 		if (args.length > 0 && (permission == null || paramPermission.matcher(permission).find() || executor.hasPermission(permission)))
 		{
 			console.debugFiner("Looking for subcommand %s for tab completion", args[0]);
@@ -292,7 +291,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 				return subCommand.prepareTabCompleteCommand(executor, params, args, stack);
 			}
 		}
-		return stack.peek().createAction(executor, stack, args, myargs);
+		return stack.peek().createAction(executor, stack, args, myArgs);
 	}
 
 	@Nonnull
@@ -306,7 +305,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 	{
 		stack.add(this);
 		String[] args = extractSubCommandArguments(executor, params, arguments);
-		IArgumentList myargs = new ArgumentList(executor, populateArgumentList(stack), params);
+		IArgumentList myArgs = new ArgumentList(executor, populateArgumentList(stack), params);
 		if (args.length > 0)
 		{
 			console.debugFiner("Looking for subcommand %s", args[0]);
@@ -319,7 +318,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 				return subCommand.prepareCommand(executor, params, args, stack);
 			}
 		}
-		return stack.peek().createAction(executor, stack, args, myargs);
+		return stack.peek().createAction(executor, stack, args, myArgs);
 	}
 
 	private String[] extractSubCommandArguments(ICommandExecutor executor, Map<String, String> params, String[] arguments)
@@ -339,14 +338,14 @@ public class Command implements ICommandHandler, ICommandPreparer
 
 	private Map<String, IArgument> populateArgumentList(Stack<ICommandHandler> stack)
 	{
-		Map<String, IArgument> myargs = Maps.newHashMap(argumentList);
+		Map<String, IArgument> myArgs = Maps.newHashMap(argumentList);
 		for (ICommandHandler command : stack)
 		{
 			for (IArgument argument : command.getParameters())
-				if (!myargs.containsKey(argument.toString()))
-					myargs.put(argument.toString(), argument);
+				if (!myArgs.containsKey(argument.toString()))
+					myArgs.put(argument.toString(), argument);
 		}
-		return myargs;
+		return myArgs;
 	}
 
 	@Nonnull
@@ -427,7 +426,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 
 	private Map<String, String> getAvailableSubCommands(ICommandExecutor executor)
 	{
-		Map<String, String> available = new HashMap<String, String>(subCommands.size());
+		Map<String, String> available = new HashMap<>(subCommands.size());
 		for (ICommandHandler sub : subCommands.values())
 		{
 			if (sub.isTabCompletable(executor))
@@ -438,7 +437,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 
 	private Map<String, String> parseParameters(ICommandExecutor context, String... args)
 	{
-		Map<String, String> parameters = new HashMap<String, String>(args.length);
+		Map<String, String> parameters = new HashMap<>(args.length);
 
 		int index = 0;
 		for (IArgument parameter : argumentList.values())
@@ -477,7 +476,7 @@ public class Command implements ICommandHandler, ICommandPreparer
 
 	protected IDebug console;
 	protected final Map<String, IArgument> argumentList;
-	private final Map<String, ICommandHandler> subCommands = new HashMap<String, ICommandHandler>(0);
+	private final Map<String, ICommandHandler> subCommands = new HashMap<>(0);
 	private final String name;
 	private final String permission;
 	private final String description;

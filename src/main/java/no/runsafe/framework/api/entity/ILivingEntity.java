@@ -6,7 +6,6 @@ import no.runsafe.framework.api.entity.projectiles.IProjectile;
 import no.runsafe.framework.api.item.IMaterial;
 import no.runsafe.framework.api.minecraft.RunsafeEntityType;
 
-import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.List;
 
@@ -40,6 +39,6 @@ public interface ILivingEntity extends IDamageable, IProjectileSource
 	void setCustomName(String name);
 	String getCustomName();
 	void stopPathfinding();
-	boolean getPersistance();
-	void setPersistance(boolean persistance);
+	boolean getPersistence();
+	void setPersistence(boolean persistance);
 }

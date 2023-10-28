@@ -14,6 +14,5 @@ public interface IEnchantment {
 
     boolean compatibleWith(IEnchant enchantment);
 
-    @SuppressWarnings("CastToConcreteClass")
     boolean canEnchantItem(IEnchantable target);
 }

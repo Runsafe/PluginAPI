@@ -5,7 +5,6 @@ import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.item.IItem;
 import no.runsafe.framework.api.metadata.IMetadata;
 
-@SuppressWarnings("InstanceMethodNamingConvention")
 public interface IBlock extends IMetadata
 {
 	void set(IItem type);

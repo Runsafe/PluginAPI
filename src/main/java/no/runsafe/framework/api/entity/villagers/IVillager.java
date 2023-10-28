@@ -1,7 +1,10 @@
 package no.runsafe.framework.api.entity.villagers;
 
-public interface IVillager
+import no.runsafe.framework.api.entity.IAgeable;
+import no.runsafe.framework.api.entity.ICreature;
+
+public interface IVillager extends IAgeable, ICreature
 {
-	void setProfession(Villager.Profession profession);
-	Villager.Profession getProfession();
+	void setProfession(VillagerProfession profession);
+	VillagerProfession getProfession();
 }

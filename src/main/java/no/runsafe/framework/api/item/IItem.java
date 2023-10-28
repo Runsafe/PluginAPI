@@ -15,7 +15,6 @@ public interface IItem extends IEnchantable {
 
     IItem Drop(ILocation location);
 
-    @SuppressWarnings("LocalVariableOfConcreteClass")
     IItem Drop(ILocation location, int amount);
 
     IBlock Place(ILocation location);

@@ -1,6 +1,5 @@
 package no.runsafe.framework.api.command.argument;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.IUniverseManager;

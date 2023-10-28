@@ -1,16 +1,12 @@
 package no.runsafe.framework.api.command.argument;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import no.runsafe.framework.api.GlobalKernel;
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.command.ICommandExecutor;
-import no.runsafe.framework.api.player.IAmbiguousPlayer;
 import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
