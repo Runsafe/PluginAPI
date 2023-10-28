@@ -3,9 +3,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>no.runsafe</groupId>
-    <artifactId>no.runsafe.framework.api</artifactId>
+    <artifactId>api</artifactId>
     <version>1.0</version>
-    <name>no.runsafe.framework.api</name>
+    <name>no.runsafe.api</name>
     <url>https://minecraft.runsafe.no</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
