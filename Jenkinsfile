@@ -1,10 +1,10 @@
-pipeline {
-	agent any
-	tools {
-		maven 'maven'
-		jdk 'jdk8'
-	}
-	node {
+node {
+	pipeline {
+		agent any
+		tools {
+			maven 'maven'
+			jdk 'jdk8'
+		}
 		stages {
 			stage ('Initialize') {
 				steps {
